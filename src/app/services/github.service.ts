@@ -13,9 +13,23 @@ export class GithubService {
     this.username = 'bdolly';
   }
 
+  /**
+   * Gets the User Profile from the Github API
+   */
   getUser(){
     return this._http
           .get(`${GITHUB_API_BASE}/users/${this.username}`)
           .map(res=>res.json());
   }
+
+  /**
+   * Gets the Users Repos from the Github API
+   */
+  getRepos(){
+    return this._http
+          .get(`${GITHUB_API_BASE}/users/${this.username}/repos`)
+          .map(res=>res.json());
+  }
+
+
 }
