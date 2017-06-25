@@ -9,9 +9,7 @@ const GITHUB_API_BASE:string = 'http://api.github.com';
 export class GithubService {
   private username:string; //Github Username
 
-  constructor(private _http:Http) { 
-    this.username = 'bdolly';
-  }
+  constructor(private _http:Http) { }
 
   /**
    * Gets the User Profile from the Github API
@@ -29,6 +27,11 @@ export class GithubService {
     return this._http
           .get(`${GITHUB_API_BASE}/users/${this.username}/repos`)
           .map(res=>res.json());
+  }
+
+
+  updateUser(username:string){
+    this.username = username;
   }
 
 

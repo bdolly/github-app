@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import {GithubService} from '../services/github.service';
 import { Http, Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
@@ -12,21 +12,27 @@ export class ProfileComponent implements OnInit {
 
   user:any;
   repos:any;
+  @Input() username:string;
 
   constructor(private _githubService: GithubService) { 
-
-  		this._githubService.getUser().subscribe(user=>{
-  			this.user = user;
-  		});
-
-  		this._githubService.getRepos().subscribe(repos=>{
-  			this.repos = repos;
-  		});
-  		
-
+  	this.user = false;
   }
 
   ngOnInit() {
+  }
+
+  searchUser(){
+
+  	this._githubService.updateUser(this.username);
+  	
+  	this._githubService.getUser().subscribe(user=>{
+  			this.user = user;
+  	});
+
+  	this._githubService.getRepos().subscribe(repos=>{
+  		this.repos = repos;
+  	});
+  		
   }
 
 }
